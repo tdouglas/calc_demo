@@ -45,7 +45,39 @@ get '/calc/multiply/:first/:second' do
 end
 
 get '/calc/divide/:first/:second' do
-  @first = params[:first].to_i
+  @first = params[:first].to_f
   @second = params[:second].to_i
-  return (@first.to_f / @second).round(2).to_s
+  return (@first / @second).round(2).to_s
 end
+
+get '/oh_hi/:name' do
+  @name = params[:name]
+  erb :hai                   #matches name of HTML file in views folder
+end
+
+get '/calc/:first/:operation/:second' do
+  @first = params[:first].to_f
+  @operation = params[:operation]
+  @second = params[:second].to_f
+  @result =
+    case @operation
+    when "add" then @first + @second
+    when "subtract" then @first - @second
+    when "multiply" then @first * @second
+    when "divide" then @first / @second
+    end
+    erb :calc                                    #return @result.to_s
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
